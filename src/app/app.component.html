@@ -1,0 +1,25 @@
+<h3>Resize and Reorder not working with Virtual Scroll</h3>
+<p-table [columns]="cols" [value]="cars" [reorderableColumns]="true" [scrollable]="true" scrollHeight="200px"  [resizableColumns]= "true" [virtualRowHeight]="20" [virtualScroll]="true">
+  <ng-template pTemplate="colgroup" let-tableColumns>
+        <colgroup>
+            <col *ngFor="let col of tableColumns"> </colgroup>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th style="width: 10px"></th>
+            <th *ngFor="let col of columns" pReorderableColumn pResizableColumn>
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+        <tr [pReorderableRow]="index">
+            <td style="width: 10px">
+                <i class="pi pi-bars" style="display: flex;justify-content: center; " pReorderableRowHandle></i>
+            </td>
+            <td *ngFor="let col of columns" class ="ui-resizable-column">
+                {{rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
